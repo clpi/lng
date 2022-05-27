@@ -1,0 +1,22 @@
+clags = -Wall -Weerror
+emflags = -flto
+eppflags = -g
+
+rule cc
+  command = clang $cflags -c $in -o $out
+  description = CC $out
+
+rule emcc
+  command = emcc $emflags  $in -o $out
+  description = Emscriptien $out
+
+rule emxx
+  command = em++ $eppflags $in -o $out
+  description = C++ > WASM
+
+build foo.o: cc foo.c
+
+build special.o: cc special.c
+  clags  = -Wall
+
+build bar.o: cc bar.c
